@@ -1,15 +1,20 @@
 @echo on
 setlocal
 
-set MODEL=medium
-set LANG=auto
+rem MODEL could be set to any of "tiny.en" "tiny" "base.en" "base" "small.en" "small" "medium.en" "medium" "large-v1" "large"
+rem Details at https://github.com/ggerganov/whisper.cpp/tree/master/models
+set MODEL=base
+
+IF "%2"=="" (  
+    set LANG=auto
+) ELSE (
+  set LANG=%2
+)
 
 set audio_file=%1
 set file_name=%~n1
 set wav_file=%~dp1%~n1.wav
 set wav_input=%~n1.wav
-
-
 
 for %%I in ("%~dp1.") do set "media_dir=%%~fI"
 set "script_dir=%~dp0"
@@ -40,6 +45,7 @@ docker run --rm -it ^
         --model /root/models/ggml-%MODEL%.bin ^
         --language %LANG% ^
         -t 4 ^
+        --translate ^
         --output-txt  --output-vtt --output-srt -nt ^
         --print-colors ^
         -f "/media/%wav_input%" ^

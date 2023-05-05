@@ -1,7 +1,7 @@
 FROM debian:11 AS build
 
 RUN apt-get update \
- && apt-get install -y libsdl2-dev alsa-utils g++ make wget
+ && apt-get install -y libsdl2-dev alsa-utils g++ make wget 
 
 RUN mkdir /whisper && \
   wget -q https://github.com/ggerganov/whisper.cpp/tarball/master -O - | \

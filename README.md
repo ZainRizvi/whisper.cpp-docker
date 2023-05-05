@@ -11,7 +11,7 @@ To transcribe a video:
 1. Clone this repository locally
 2. Create a `media` folder in this repository.
 3. Store the video/audio file you want transcribed in the media folder.
-4. Run `transcribe.sh path/to/your/media.mp4` (any audio/video file will work)
+4. Run `transcribe.sh path/to/your/media.mp4`. Any audio/video file will work
 5. Your output transcript files will be stored next to the input file, in txt, vtt, and srv formats.
 
 # Acknowledgements
