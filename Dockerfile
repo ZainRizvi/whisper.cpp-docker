@@ -24,6 +24,8 @@ WORKDIR /root
 
 ARG model
 RUN mkdir /root/models
+RUN apt-get update && apt-get install -y python3-pip ffmpeg
+RUN python3 -m pip install yt-dlp
 COPY --from=build "/whisper/models/ggml-${model}.bin" "/root/models/ggml-${model}.bin"
 COPY --from=build /whisper/main /usr/local/bin/whisper
 COPY --from=build /whisper/stream /usr/local/bin/stream
