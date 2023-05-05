@@ -2,8 +2,11 @@
 
 set -euxo pipefail
 
+# MODEL could be set to any of "tiny.en" "tiny" "base.en" "base" "small.en" "small" "medium.en" "medium" "large-v1" "large"
+# Details at https://github.com/ggerganov/whisper.cpp/tree/master/models
 MODEL="base"
-LANG="auto"
+LANG="${2:-auto}"
+
 
 audio_file="${1}"
 file_name="$(basename "${audio_file}")"
@@ -34,8 +37,8 @@ docker run --rm -it \
         --model /root/models/ggml-${MODEL}.bin \
         --language ${LANG} \
         -t 4 \
-        -p 2 \
+        --translate \
         --output-txt --output-vtt --output-srt -nt \
         --print-colors \
         -f "/media/$(basename "${wav_file}")" \
-        -of "/media/output/${basename}"
+        -of "/media/${basename}"
